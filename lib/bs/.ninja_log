@@ -1,15 +1,11 @@
 # ninja log v5
-1	9	0	src/main_entry.mlast	80ddc76f3e637b8e
-0	10	0	src/fib.mlast	1206df9ef6b24445
-10	14	0	src/fib.mlast.d	e04bacdf27c38c46
-9	14	0	src/main_entry.mlast.d	ebd8c72718ee8a59
-0	9	0	src/fib.cmj	a0886b743d2e166d
-0	9	0	/Users/gabemontague/Sites/nandpl/lib/js/src/fib.js	a0886b743d2e166d
-0	9	0	src/fib.cmi	a0886b743d2e166d
-0	8	0	src/main_entry.mlast	80ddc76f3e637b8e
-8	13	0	src/main_entry.mlast.d	ebd8c72718ee8a59
-0	8	0	src/main_entry.mlast	80ddc76f3e637b8e
-8	12	0	src/main_entry.mlast.d	ebd8c72718ee8a59
-1	10	0	src/main_entry.cmj	381309fce2dc7534
-1	10	0	/Users/gabemontague/Sites/nandpl/lib/js/src/main_entry.js	381309fce2dc7534
-1	10	0	src/main_entry.cmi	381309fce2dc7534
+0	12	0	src/main_entry.mlast	92233f92adf8b896
+0	12	0	src/fib.mlast	bd47addc171499c3
+12	19	0	src/fib.mlast.d	687927eefd9f926d
+12	19	0	src/main_entry.mlast.d	51b49308f8248296
+0	15	0	src/fib.cmj	92696f4249a5ff70
+0	15	0	/Users/gabemontague/Sites/nandpl/lib/js/src/fib.js	92696f4249a5ff70
+0	15	0	src/fib.cmi	92696f4249a5ff70
+15	29	0	src/main_entry.cmj	6706e535878c0269
+15	29	0	/Users/gabemontague/Sites/nandpl/lib/js/src/main_entry.js	6706e535878c0269
+15	29	0	src/main_entry.cmi	6706e535878c0269

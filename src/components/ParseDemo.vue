@@ -14,7 +14,7 @@
 
 <script>
 
-import parse from '../parser.js';
+import fib from 'backend/fib';
 
 export default {
     name: 'parse-demo',
@@ -27,7 +27,8 @@ export default {
     },
     methods: {
         'parse': function(source) {
-            this.result = parse(this.source);
+            console.log(fib);
+            this.result = fib.fib(7);
         }
     }
 };
