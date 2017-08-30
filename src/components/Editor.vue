@@ -22,6 +22,12 @@ VueCodeMirror.CodeMirror.defineMode('nand', () => {
         token(stream, state) {
             if (stream.match("NAND")) {
                 return "keyword";
+            } else if (stream.match("up")) {
+                return "string";
+            } else if (stream.match("loop")) {
+                return "number";
+            } else if (stream.match("validx_")) {
+                return "number";
             } else if (stream.match("//")) {
                 stream.skipToEnd();
                 return "comment";

@@ -23,8 +23,14 @@ function decimalInput(input) {
     return output;
 }
 
+
+
 // TODO: Document interface of this function
-function interpret(program, input, outputCallback, errCallback) {
+function interpret(program, input, outputCallback, errCallback, flags) {
+
+    if (flags === undefined) {
+        flags = {};
+    }
 
     // Redirect console output
     var consoleCallback = console.log;
