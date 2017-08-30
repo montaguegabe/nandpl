@@ -43,9 +43,6 @@ VueCodeMirror.CodeMirror.defineMode('nand', () => {
                 stream.next();
                 return null;
             }
-            bAND
-            bXOR
-            def
         }
     };
 });
