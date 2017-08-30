@@ -28,6 +28,14 @@ VueCodeMirror.CodeMirror.defineMode('nand', () => {
                 return "number";
             } else if (stream.match("validx_")) {
                 return "number";
+            } else if (stream.match("while")) {
+                return "keyword";
+            } else if (stream.match("if")) {
+                return "keyword";
+            } else if (stream.match("while")) {
+                return "keyword";
+            } else if (stream.match("def")) {
+                return "keyword";
             } else if (stream.match("//")) {
                 stream.skipToEnd();
                 return "comment";
@@ -35,6 +43,9 @@ VueCodeMirror.CodeMirror.defineMode('nand', () => {
                 stream.next();
                 return null;
             }
+            bAND
+            bXOR
+            def
         }
     };
 });
