@@ -22,9 +22,6 @@
 </template>
 
 <script>
-
-// CSS from "working example" @ https://github.com/vuejs/vue-loader/issues/95
-
 import Editor from 'components/Editor.vue';
 
 export default {
@@ -43,7 +40,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
+//@import "grid-settings";
 @import "neat";
+
+// TODO: Real style
 
 h1, h2 {
     font-weight: normal;

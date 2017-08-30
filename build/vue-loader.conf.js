@@ -10,7 +10,7 @@ var loaders = utils.cssLoaders({
     extract: isProduction
 });
 
-// TODO: HACK
+// TODO: Fix HACK
 var scssLoaders = loaders.scss;
 var lastLoader = scssLoaders[scssLoaders.length - 1];
 lastLoader.options.includePaths = bourbonIncludes;
@@ -18,7 +18,6 @@ lastLoader.options.includePaths = bourbonIncludes;
 var sassLoaders = loaders.sass;
 lastLoader = sassLoaders[sassLoaders.length - 1];
 lastLoader.options.includePaths = bourbonIncludes;
-console.log(lastLoader);
 
 module.exports = {
     loaders: loaders
