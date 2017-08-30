@@ -2,6 +2,10 @@ var path = require('path');
 var config = require('../config');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+exports.exec = function (cmd) {
+    return require('child_process').execSync(cmd).toString().trim();
+}
+
 exports.assetsPath = function (_path) {
     var assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory

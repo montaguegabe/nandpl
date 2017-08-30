@@ -1,7 +1,7 @@
 <template>
-<div class="hello">
+<div class="ide">
     <h1>{{ msg }}</h1>
-    <parse-demo></parse-demo>
+    <editor></editor>
     <h2>Essential Links</h2>
     <ul>
         <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
@@ -22,23 +22,29 @@
 </template>
 
 <script>
-import ParseDemo from './ParseDemo.vue';
+
+// CSS from "working example" @ https://github.com/vuejs/vue-loader/issues/95
+
+import Editor from 'components/Editor.vue';
 
 export default {
-    name: 'hello',
+    name: 'ide',
     data: function () {
         return {
-            msg: 'Welcome to Your Vue.js App'
+            msg: 'Welcome to the NAND editor'
         };
     },
     components: {
-        ParseDemo
+        Editor
     }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+@import "neat";
+
 h1, h2 {
     font-weight: normal;
 }

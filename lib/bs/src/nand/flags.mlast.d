@@ -1,0 +1,1 @@
+src/nand/flags.cmj : src/nand/PL_data.cmj src/nand/PL_functor.cmj src/nand/PL_modules.cmj

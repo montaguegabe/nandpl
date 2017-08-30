@@ -1,12 +1,12 @@
 <template>
-<div class="hello">
+<div class="help">
     <h1>See ya later {{ animal }}!</h1>
 </div>
 </template>
 
 <script>
 export default {
-    name: 'goodbye',
+    name: 'help',
     data: function () {
         return {
             animal: 'alligator'

@@ -7,6 +7,7 @@ if (!process.env.NODE_ENV) {
 
 var opn = require('opn');
 var path = require('path');
+var utils = require('./utils');
 var express = require('express');
 var webpack = require('webpack');
 var proxyMiddleware = require('http-proxy-middleware');
@@ -33,6 +34,10 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
     log: () => {}
 });
+
+// Build OCaml
+console.log('> Building OCaml... (will not live update)');
+utils.exec('$(npm bin)/bsb');
 
 // Force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {

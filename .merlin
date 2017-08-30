@@ -5,4 +5,6 @@ B /Users/gabemontague/Sites/nandpl/node_modules/bs-platform/lib/ocaml
 FLG -nostdlib -no-alias-deps -color always -w -40+6+7+27+32..39+44+45
 S src
 B lib/bs/src
+S src/nand
+B lib/bs/src/nand
 ####BSB GENERATED: NO EDIT}

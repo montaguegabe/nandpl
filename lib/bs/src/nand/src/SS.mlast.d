@@ -1,0 +1,1 @@
+src/nand/src/SS.cmj : src/nand/src/PL_functor.cmj

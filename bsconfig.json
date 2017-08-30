@@ -1,4 +1,7 @@
 {
-    "name" : "helo",
-    "sources" : { "dir" : "src"}
+    "name" : "nand",
+    "sources" : {
+        "dir" : "src",
+        "subdirs" : ["nand"]
+    }
 }

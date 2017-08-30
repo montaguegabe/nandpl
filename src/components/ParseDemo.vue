@@ -1,6 +1,6 @@
 <template>
 <div class="parse-demo">
-    <div>Enter the expression to parse:</div>
+    <div>Enter NAND code</div>
     <div>
         <textarea v-model="source"></textarea>
     </div>
@@ -14,7 +14,7 @@
 
 <script>
 
-import fib from 'backend/fib';
+import { executeString as ExecuteString } from 'nand/prog_exec';
 
 export default {
     name: 'parse-demo',
@@ -27,8 +27,9 @@ export default {
     },
     methods: {
         'parse': function(source) {
-            console.log(fib);
-            this.result = fib.fib(7);
+            console.log(ExecuteString);
+            window.ExecuteString = ExecuteString;
+            this.result = 7;
         }
     }
 };

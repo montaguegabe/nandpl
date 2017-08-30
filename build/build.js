@@ -5,6 +5,7 @@ process.env.NODE_ENV = 'production';
 var ora = require('ora');
 var rm = require('rimraf');
 var path = require('path');
+var utils = require('./utils');
 var chalk = require('chalk');
 var webpack = require('webpack');
 var config = require('../config');
@@ -16,6 +17,12 @@ spinner.start();
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
 
     if (err) throw err;
+
+    // Build OCaml
+    console.log('\n> Building OCaml...\n');
+    utils.exec('$(npm bin)/bsb');
+
+    // Run webpack
     webpack(webpackConfig, function (err, stats) {
         spinner.stop();
         if (err) throw err;
