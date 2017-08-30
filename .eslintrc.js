@@ -18,6 +18,9 @@ module.exports = {
         'html'
     ],
 
+    "globals": {
+    },
+
     // Add your custom rules here
     'rules': {
 
@@ -33,6 +36,8 @@ module.exports = {
         // Relax rules a little
         'one-var': 'off',
         'vars-on-top': 'off',
+        'no-plusplus': 'off',
+        'no-continue': 'off',
 
         // No space before functions rule doesn't really matter
         'space-before-function-paren': ['off', 'never']

@@ -1,23 +1,37 @@
 <template>
 <div class="ide">
     <h3>NAND Editor</h3>
-    <editor></editor>
+    <editor ref="editor"></editor>
+    <input class="input" v-model="input"></input>
+    <button @click="interpret">Interpret</button>
 </div>
 </template>
 
 <script>
 import Editor from 'components/Editor.vue';
+import Connector from 'services/Connector';
+
+function output(message) {
+    window.result += "\n" + message;
+}
 
 export default {
     name: 'ide',
     data: function () {
-        // TODO: Remove
-        /*return {
-            msg: 'Welcome to the NAND editor'
-        };*/
+        return {
+            input: '0,1'
+        };
     },
     components: {
         Editor
+    },
+    methods: {
+        'interpret': function(input) {
+            var code = this.$refs.editor.getCode();
+            var result2 = Connector.interpret(code, this.input, output, output);
+            console.log(window.result);
+            console.log(result2);
+        }
     }
 };
 </script>

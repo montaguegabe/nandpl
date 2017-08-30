@@ -1,6 +1,5 @@
 <template>
 <div class='editor'>
-    <div>Editor</div>
     <codemirror v-model="code" :options="editorOptions"></codemirror>
 </div>
 </template>
@@ -8,8 +7,6 @@
 <script>
 
 // SEE https://github.com/surmon-china/vue-codemirror
-// VENDOR BUG: https://github.com/JedWatson/react-codemirror/issues/34
-//       ALSO: https://www.google.com/search?safe=active&q=codemirror+doesn%27t+highlight&oq=codemirror+select+doesn%27t+&gs_l=psy-ab.3.0.0i22i30k1.7058.7841.0.8745.8.7.0.0.0.0.292.928.0j2j2.4.0....0...1.1.64.psy-ab..4.4.927.PWbKBi8_Cr4
 
 // FUTURE: Require resource packs here
 // require('codemirror/some-resource')
@@ -18,6 +15,23 @@ import Vue from 'vue';
 import VueCodeMirror from 'vue-codemirror';
 Vue.use(VueCodeMirror);
 import { codemirror, CodeMirror } from 'vue-codemirror';
+
+// Define mode
+VueCodeMirror.CodeMirror.defineMode('nand', () => {
+    return {
+        token(stream, state) {
+            if (stream.match("NAND")) {
+                return "keyword";
+            } else if (stream.match("//")) {
+                stream.skipToEnd();
+                return "comment";
+            } else {
+                stream.next();
+                return null;
+            }
+        }
+    };
+});
 
 export default {
     components: {
@@ -30,18 +44,17 @@ export default {
             // Options for codemirror
             editorOptions: {
                 tabSize: 4,
-                mode: 'text/javascript',
-                //theme: 'base16-dark',
+                mode: 'nand',
                 lineNumbers: true,
                 line: false
             }
         };
-    }
-    /*computed: {
-        editor: function() {
-            return this.$refs.myEditor.editor;
+    },
+    methods: {
+        'getCode': function() {
+            return this.code;
         }
-    }*/
+    }
 };
 </script>
 

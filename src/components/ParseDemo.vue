@@ -14,8 +14,6 @@
 
 <script>
 
-import { executeString as ExecuteString } from 'nand/prog_exec';
-
 export default {
     name: 'parse-demo',
 
@@ -27,8 +25,6 @@ export default {
     },
     methods: {
         'parse': function(source) {
-            console.log(ExecuteString);
-            window.ExecuteString = ExecuteString;
             this.result = 7;
         }
     }
