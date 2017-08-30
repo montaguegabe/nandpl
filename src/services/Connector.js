@@ -39,8 +39,7 @@ function interpret(program, input, outputCallback, errCallback) {
     try {
         result = executeString(program, decimalInput(input));
     } catch (err) {
-        errCallback(err.message);
-        throw err;
+        errCallback(err.toString());
     }
 
     console.log = consoleCallback;

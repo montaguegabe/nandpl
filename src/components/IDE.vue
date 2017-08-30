@@ -2,17 +2,24 @@
 <div class="ide">
     <h3>NAND Editor</h3>
     <editor ref="editor"></editor>
-    <input class="input" v-model="input"></input>
+    <input class="input" v-model="input">
     <button @click="interpret">Interpret</button>
+    <hr>
+    <console ref="console"></console>
 </div>
 </template>
 
 <script>
 import Editor from 'components/Editor.vue';
+import Console from 'components/Console.vue';
 import Connector from 'services/Connector';
 
-function output(message) {
-    window.result += "\n" + message;
+function passMessage(message) {
+    this.$refs.console.pushMessage(message, 'message');
+}
+
+function passError(error) {
+    this.$refs.console.pushMessage(error, 'error');
 }
 
 export default {
@@ -23,14 +30,18 @@ export default {
         };
     },
     components: {
-        Editor
+        Editor,
+        Console
     },
     methods: {
         'interpret': function(input) {
+
+            this.$refs.console.clear();
             var code = this.$refs.editor.getCode();
-            var result2 = Connector.interpret(code, this.input, output, output);
-            console.log(window.result);
-            console.log(result2);
+            var result = Connector.interpret(code, this.input, passMessage.bind(this), passError.bind(this));
+            this.$refs.console.pushMessage(result, 'result');
+
+            console.log(result);
         }
     }
 };

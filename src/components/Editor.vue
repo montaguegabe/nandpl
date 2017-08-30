@@ -64,6 +64,7 @@ export default {
 .editor {
     text-align: left;
     font-size: 16px;
+    border-top: 1px solid #BBB;
 }
 
 </style>
