@@ -1,5 +1,5 @@
 TODO
-[-] Editor https://surmon-china.github.io/vue-codemirror/
+[x] Editor https://surmon-china.github.io/vue-codemirror/
 [-] NAND++
 [-] NAND<<
 [-] Output

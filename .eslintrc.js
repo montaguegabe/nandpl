@@ -19,6 +19,7 @@ module.exports = {
     ],
 
     "globals": {
+        "require": true
     },
 
     // Add your custom rules here

@@ -38,6 +38,9 @@ export default {
     background-color: #130f1c;
     min-height: 300px;
     padding-left: 5px;
+    overflow-y: scroll;
+    overflow-x: visible;
+    word-wrap: break-word;
 }
 
 .console-item {
