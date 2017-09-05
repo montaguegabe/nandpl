@@ -13,15 +13,14 @@ import VueCodeMirror from 'vue-codemirror';
 Vue.use(VueCodeMirror);
 import { codemirror, CodeMirror } from 'vue-codemirror';
 
-console.log("1");
-console.log(VueCodeMirror);
-console.log("2");
-console.log(codemirror);
-console.log("3");
-console.log(CodeMirror);
-
-//var doc = CodeMirror.getDoc();
-//console.log(doc);
+// console.log("1");
+// console.log(VueCodeMirror);
+// console.log("2");
+// console.log(codemirror);
+// console.log("3");
+// console.log(CodeMirror);
+// var doc = CodeMirror.getDoc();
+// console.log(doc);
 
 // Define mode
 VueCodeMirror.CodeMirror.defineMode('nand', () => {

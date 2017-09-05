@@ -1,6 +1,11 @@
 <template>
 <div class="ide">
     <h3>NAND Editor</h3>
+    <p>Implementation of the NAND, NAND++ and NAND&lt;&lt; languages.
+        <span style='display: inline-block'>
+            <a href="http://www.introtcs.org/public/index.html">introtcs.org</a> | <a href="http://www.introtcs.org/public/lec_A_NAND_prog_lang.html">specification</a> | <a href="https://github.com/juan-esteller/NAND">repository</a>
+        </span>
+    </p>
     <editor ref="editor"></editor>
     <!--<input type="checkbox" id="silent-checkbox" v-model="silent">
     <label for="checkbox">Silent</label> -->
