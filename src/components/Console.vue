@@ -27,7 +27,6 @@ export default {
         'scrollBottom': function() {
             var el = this.$el;
             var objDiv = document.getElementsByClassName("console")[0];
-            debugger;
             el.scrollTop = el.scrollHeight;
         }
     }

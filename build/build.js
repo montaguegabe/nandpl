@@ -32,12 +32,11 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
             children: false,
             chunks: false,
             chunkModules: false
-        }) + '\n\n');
+        }) + '\n');
+        console.log('Removing strictness...\n');
+
+        utils.exec("export LANG=C; export LC_CTYPE=C; find ./dist -type f -print0 | xargs -0 sed -i '' 's/use strict/use relaxed/g'");
 
         console.log(chalk.cyan('  Build complete.\n'));
     });
-
-    // Disable strict mode
-    utils.exec("find .dist -type f -print0 | xargs -0 sed -i 's/use strict/use relaxed/g'");
-
 });

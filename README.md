@@ -1,14 +1,6 @@
-# vue-webpack-extended [![CircleCI](https://circleci.com/gh/montaguegabe/vue-webpack-extended.svg?style=shield)](https://circleci.com/gh/montaguegabe/vue-webpack-extended)
+# The NAND Programming Language Editor [![CircleCI](https://circleci.com/gh/montaguegabe/vue-webpack-extended.svg?style=shield)](https://circleci.com/gh/montaguegabe/vue-webpack-extended)
 
-
-Takes the scaffolding of [vue-webpack-boilerplate](https://github.com/vuejs-templates/webpack) and adds the following:
-1) Circle CI support
-2) SCSS
-3) Crockford style and linting
-4) HTML boilerplate
-5) Git precommit linting
-
-## Build Setup
+## Setup
 
 ``` bash
 # Install dependencies
@@ -32,5 +24,12 @@ npm run e2e
 # Run all tests
 npm test
 ```
+
+Scaffolding from [vue-webpack-boilerplate](https://github.com/vuejs-templates/webpack) with extra features:
+1) Circle CI support
+2) SCSS
+3) Crockford style and linting
+4) HTML boilerplate
+5) Git precommit linting
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
