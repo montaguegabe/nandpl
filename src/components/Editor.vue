@@ -3,7 +3,7 @@
     <codemirror v-model="code"
         :options="editorOptions"
         @ready="onEditorReady"
-        @change="onEditorCodeChange">
+        @change="dirty = true; onEditorCodeChange($event)">
     </codemirror>
 </div>
 </template>
@@ -72,7 +72,8 @@ export default {
 
             codeMirror: null,
             codeMode: '',
-            codeModePrev: ''
+            codeModePrev: '',
+            dirty: false
         };
     },
     methods: {
@@ -108,6 +109,8 @@ export default {
             if (this.codeMode !== this.codeModePrev) {
                 this.$emit('modechange', this.codeMode, this.codeModePrev);
             }
+
+            this.dirty = false;
         }, 500)
     }
 };
