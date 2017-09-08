@@ -8,22 +8,22 @@ Vue.use(VueLocalStorage);
 function saveDocument (codeMirror) {
 
     var doc = codeMirror.getDoc();
-    Vue.localStorage.set('nandDoc', doc);
+    Vue.localStorage.set('docContents', doc.getValue());
+    Vue.localStorage.set('docHistory', JSON.stringify(doc.getHistory()));
 }
 
 function restoreDocument(codeMirror) {
 
-    var doc = Vue.localStorage.get('nandDoc');
-    if (doc) {
-        codeMirror.swapDoc(doc);
-        return doc;
-
-    } else {
-        return null;
+    var doc = codeMirror.getDoc();
+    var docContents = Vue.localStorage.get('docContents');
+    var docHistory = JSON.parse(Vue.localStorage.get('docHistory'));
+    if (docHistory && docContents) {
+        doc.setValue(docContents);
+        doc.setHistory(docHistory);
     }
 }
 
 export default {
-    loadDocument: loadDocument,
+    saveDocument: saveDocument,
     restoreDocument: restoreDocument
 };

@@ -1,6 +1,10 @@
 <template>
 <div class='editor'>
-    <codemirror v-model="code" :options="editorOptions"></codemirror>
+    <codemirror v-model="code"
+        :options="editorOptions"
+        @ready="onEditorReady"
+        @change="onEditorCodeChange">
+    </codemirror>
 </div>
 </template>
 
@@ -10,17 +14,10 @@
 
 import Vue from 'vue';
 import VueCodeMirror from 'vue-codemirror';
-Vue.use(VueCodeMirror);
 import { codemirror, CodeMirror } from 'vue-codemirror';
+import Storage from 'services/Storage.js';
 
-// console.log("1");
-// console.log(VueCodeMirror);
-// console.log("2");
-// console.log(codemirror);
-// console.log("3");
-// console.log(CodeMirror);
-// var doc = CodeMirror.getDoc();
-// console.log(doc);
+Vue.use(VueCodeMirror);
 
 // Define mode
 VueCodeMirror.CodeMirror.defineMode('nand', () => {
@@ -53,6 +50,8 @@ VueCodeMirror.CodeMirror.defineMode('nand', () => {
     };
 });
 
+require('codemirror/keymap/sublime.js');
+
 export default {
     components: {
         codemirror
@@ -66,13 +65,25 @@ export default {
                 tabSize: 4,
                 mode: 'nand',
                 lineNumbers: true,
-                line: false
-            }
+                line: false,
+                keyMap: 'sublime'
+            },
+
+            codeMirror: null
         };
     },
     methods: {
         'getCode': function() {
             return this.code;
+        },
+        'onEditorReady': function(codeMirror) {
+
+            // Load document
+            this.codeMirror = codeMirror;
+            Storage.restoreDocument(codeMirror);
+        },
+        'onEditorCodeChange': function(code) {
+            Storage.saveDocument(this.codeMirror);
         }
     }
 };
@@ -85,6 +96,7 @@ export default {
     text-align: left;
     font-size: 16px;
     border-top: 1px solid #BBB;
+    line-height: 21px;
 }
 
 </style>

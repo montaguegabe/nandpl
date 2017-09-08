@@ -3,7 +3,7 @@ TODO
 [x] NAND++
 [x] NAND<<
 [x] Output
-[-] Help
+[x] Help
 [-] Persistence
 [-] Comment indicator
 [-] SS button to code
