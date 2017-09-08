@@ -29,7 +29,13 @@ VueCodeMirror.CodeMirror.defineMode('nand', () => {
                 return "string";*/
             } else if (stream.match("loop")) {
                 return "number";
+            } else if (stream.match("one")) {
+                return "number";
+            } else if (stream.match("zero")) {
+                return "number";
             } else if (stream.match("validx_")) {
+                return "number";
+            } else if (stream.match("_i")) {
                 return "number";
             } else if (stream.match("while")) {
                 return "keyword";

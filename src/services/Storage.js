@@ -5,7 +5,7 @@ import VueLocalStorage from 'vue-localstorage';
 import Vue from 'vue';
 Vue.use(VueLocalStorage);
 
-function saveDocument (codeMirror) {
+function saveDocument(codeMirror) {
 
     var doc = codeMirror.getDoc();
     Vue.localStorage.set('docContents', doc.getValue());

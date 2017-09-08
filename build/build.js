@@ -36,4 +36,8 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
 
         console.log(chalk.cyan('  Build complete.\n'));
     });
+
+    // Disable strict mode
+    utils.exec("find .dist -type f -print0 | xargs -0 sed -i 's/use strict/use relaxed/g'");
+
 });

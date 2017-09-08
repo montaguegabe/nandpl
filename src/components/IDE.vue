@@ -17,9 +17,8 @@
     <label for="two">NAND&lt;&lt;</label>
     <input type="checkbox" id="ss-checkbox" v-model="ss">
     <label for="checkbox">Syntactic Sugar</label>
-    <input type="checkbox" id="dry-checkbox" v-model="dry">
-    <label for="checkbox">Dry</label>
-    <input class="input-box" v-model="input">
+    <button class="interpret" v-if="ss" @click="unsweeten">Unsweeten</button>
+    <input class="input-box" v-model="input" title="For example: 01, d4">
     <button class="interpret" @click="interpret">Interpret</button>
     <hr>
     <console ref="console"></console>
@@ -32,6 +31,17 @@
 import Editor from 'components/Editor.vue';
 import Console from 'components/Console.vue';
 import Connector from 'services/Connector';
+
+function languageToComment(mode) {
+    switch (mode) {
+    case 'nand':
+        return '// NAND';
+    case 'nandpp':
+        return '// NAND++';
+    case 'nandgg':
+        return '// NAND<<';
+    }
+}
 
 function reverse(s) {
     return s.split("").reverse().join("");
@@ -53,7 +63,7 @@ export default {
     name: 'ide',
     data: function () {
         return {
-            input: '0,1',
+            input: '01',
             dry: false,
             silent: false,
             ss: false,
@@ -66,7 +76,12 @@ export default {
         Console
     },
     methods: {
-        'interpret': function(input) {
+        'unsweeten': function() {
+            this.dry = true;
+            this.interpret();
+            this.dry = false;
+        },
+        'interpret': function() {
 
             if (!this.dry) {
                 this.$refs.console.clear();
@@ -86,14 +101,19 @@ export default {
                 var num = parseInt(resultClean, 2);
                 this.$refs.console.pushMessage('Result: ' + result.toString() + ' (' + num.toString() + ')', 'result');
 
+                // Scroll to bottom of console
+                setTimeout(() => {
+                    this.$refs.console.scrollBottom();
+                }, 5);
+
                 console.log(result);
             }
 
             // Editor gets generated code for dry mode
             if (this.dry) {
-                this.$refs.editor.setCode(this.transformed);
+                var header = languageToComment(this.language);
+                this.$refs.editor.setCode(header + '\n' + this.transformed);
                 this.transformed = '';
-                this.$refs.console.pushMessage('Done');
             }
         },
         'codeModeChanged': function(mode) {

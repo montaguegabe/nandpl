@@ -23,6 +23,12 @@ export default {
         },
         'clear': function() {
             this.messages = [];
+        },
+        'scrollBottom': function() {
+            var el = this.$el;
+            var objDiv = document.getElementsByClassName("console")[0];
+            debugger;
+            el.scrollTop = el.scrollHeight;
         }
     }
 };
@@ -36,7 +42,7 @@ export default {
     font-size: 16px;
     color: white;
     background-color: #130f1c;
-    min-height: 300px;
+    height: 300px;
     padding-left: 5px;
     overflow-y: scroll;
     overflow-x: visible;
