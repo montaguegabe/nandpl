@@ -25,8 +25,8 @@ VueCodeMirror.CodeMirror.defineMode('nand', () => {
         token(stream, state) {
             if (stream.match("NAND")) {
                 return "keyword";
-            } else if (stream.match("up")) {
-                return "string";
+            /*} else if (stream.match("up")) {
+                return "string";*/
             } else if (stream.match("loop")) {
                 return "number";
             } else if (stream.match("validx_")) {
@@ -53,6 +53,26 @@ VueCodeMirror.CodeMirror.defineMode('nand', () => {
 require('codemirror/keymap/sublime.js');
 import debounce from 'debounce';
 
+function checkLanguageType(code) {
+
+    // Check first lines of code for language type
+    this.codeModePrev = this.codeMode;
+    var firstLine = code.substr(0, code.indexOf('\n'));
+    firstLine = firstLine.replace(/\s/g, '').toLowerCase();
+    if (firstLine.startsWith('//nand++')) {
+        this.codeMode = 'nandpp';
+    } else if (firstLine.startsWith('//nand<<')) {
+        this.codeMode = 'nandgg';
+    } else if (firstLine.startsWith('//nand')) {
+        this.codeMode = 'nand';
+    }
+
+    // Broadcast changes to code mode
+    if (this.codeMode !== this.codeModePrev) {
+        this.$emit('modechange', this.codeMode, this.codeModePrev);
+    }
+}
+
 export default {
     components: {
         codemirror
@@ -73,42 +93,41 @@ export default {
             codeMirror: null,
             codeMode: '',
             codeModePrev: '',
-            dirty: false
+            dirty: false,
+            ignoreNext: false
         };
     },
     methods: {
         'getCode': function() {
             return this.code;
         },
+        'setCode': function(code) {
+            this.code = code;
+        },
         'onEditorReady': function(codeMirror) {
 
             // Load document
             this.codeMirror = codeMirror;
             var restored = Storage.restoreDocument(codeMirror);
-            if (!restored) {
+            if (!restored.length) {
                 // Add a default line of NAND
                 this.code = 'y_0 := x_0 NAND x_1';
+            } else {
+                this.ignoreNext = true;
+                checkLanguageType.call(this, restored);
             }
         },
         'onEditorCodeChange': debounce(function(code) {
+
+            // Ignore save triggered by load from storage
+            if (this.ignoreNext) {
+                this.ignoreNext = false;
+                return;
+            }
+
             Storage.saveDocument(this.codeMirror);
 
-            // Check first lines of code for language type
-            this.codeModePrev = this.codeMode;
-            var firstLine = code.substr(0, code.indexOf('\n'));
-            firstLine = firstLine.replace(/\s/g, '').toLowerCase();
-            if (firstLine.startsWith('//nand++')) {
-                this.codeMode = 'nandpp';
-            } else if (firstLine.startsWith('//nand<<')) {
-                this.codeMode = 'nandgg';
-            } else if (firstLine.startsWith('//nand')) {
-                this.codeMode = 'nand';
-            }
-
-            // Broadcast changes to code mode
-            if (this.codeMode !== this.codeModePrev) {
-                this.$emit('modechange', this.codeMode, this.codeModePrev);
-            }
+            checkLanguageType.call(this, code);
 
             this.dirty = false;
         }, 500)

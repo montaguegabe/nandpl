@@ -20,9 +20,9 @@ function restoreDocument(codeMirror) {
     if (docHistory && docContents) {
         doc.setValue(docContents);
         doc.setHistory(docHistory);
-        return true;
+        return docContents;
     }
-    return false;
+    return '';
 }
 
 export default {

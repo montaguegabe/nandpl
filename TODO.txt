@@ -5,5 +5,7 @@ TODO
 [x] Output
 [x] Help
 [x] Persistence
-[-] Comment indicator
+[x] Comment indicator
+[x] No save upon load
 [-] SS button to code
+[-] Undo rechecks language

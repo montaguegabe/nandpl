@@ -37,8 +37,12 @@ function reverse(s) {
     return s.split("").reverse().join("");
 }
 
-function passMessage(message) {
-    this.$refs.console.pushMessage(message, 'message');
+function passMessageToConsole(output) {
+    this.$refs.console.pushMessage(output, 'message');
+}
+
+function aggregateMessage(output)  {
+    this.transformed += output + '\n';
 }
 
 function passError(error) {
@@ -53,7 +57,8 @@ export default {
             dry: false,
             silent: false,
             ss: false,
-            language: 'nand'
+            language: 'nand',
+            transformed: ''
         };
     },
     components: {
@@ -62,9 +67,15 @@ export default {
     },
     methods: {
         'interpret': function(input) {
-            this.$refs.console.clear();
+
+            if (!this.dry) {
+                this.$refs.console.clear();
+            }
+            this.transformed = '';
+
             var code = this.$refs.editor.getCode();
-            var result = Connector.interpret(code, this.input, passMessage.bind(this), passError.bind(this), {
+            var messageHandler = this.dry ? aggregateMessage.bind(this) : passMessageToConsole.bind(this);
+            var result = Connector.interpret(code, this.input, messageHandler, passError.bind(this), {
                 dry: this.dry,
                 silent: this.silent,
                 ss: this.ss,
@@ -74,9 +85,16 @@ export default {
                 var resultClean = reverse(result);
                 var num = parseInt(resultClean, 2);
                 this.$refs.console.pushMessage('Result: ' + result.toString() + ' (' + num.toString() + ')', 'result');
+
+                console.log(result);
             }
 
-            console.log(result);
+            // Editor gets generated code for dry mode
+            if (this.dry) {
+                this.$refs.editor.setCode(this.transformed);
+                this.transformed = '';
+                this.$refs.console.pushMessage('Done');
+            }
         },
         'codeModeChanged': function(mode) {
             if (mode) {
@@ -128,6 +146,6 @@ li {
 }
 
 a {
-    color: #42b983;
+    color: #708;
 }
 </style>
