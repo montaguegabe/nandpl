@@ -7,7 +7,7 @@
         </span>
     </p>
 
-    <editor ref="editor"></editor>
+    <editor ref="editor" v-on:modechange="codeModeChanged"></editor>
 
     <input type="radio" id="nand" value="nand" v-model="language">
     <label for="one">NAND</label>
@@ -77,6 +77,11 @@ export default {
             }
 
             console.log(result);
+        },
+        'codeModeChanged': function(mode) {
+            if (mode) {
+                this.language = mode;
+            }
         },
         'help': function() {
             this.$modal.show('dialog', {

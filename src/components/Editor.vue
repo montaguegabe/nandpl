@@ -70,7 +70,9 @@ export default {
                 keyMap: 'sublime'
             },
 
-            codeMirror: null
+            codeMirror: null,
+            codeMode: '',
+            codeModePrev: ''
         };
     },
     methods: {
@@ -87,8 +89,25 @@ export default {
                 this.code = 'y_0 := x_0 NAND x_1';
             }
         },
-        'onEditorCodeChange': debounce(function(e) {
+        'onEditorCodeChange': debounce(function(code) {
             Storage.saveDocument(this.codeMirror);
+
+            // Check first lines of code for language type
+            this.codeModePrev = this.codeMode;
+            var firstLine = code.substr(0, code.indexOf('\n'));
+            firstLine = firstLine.replace(/\s/g, '').toLowerCase();
+            if (firstLine.startsWith('//nand++')) {
+                this.codeMode = 'nandpp';
+            } else if (firstLine.startsWith('//nand<<')) {
+                this.codeMode = 'nandgg';
+            } else if (firstLine.startsWith('//nand')) {
+                this.codeMode = 'nand';
+            }
+
+            // Broadcast changes to code mode
+            if (this.codeMode !== this.codeModePrev) {
+                this.$emit('modechange', this.codeMode, this.codeModePrev);
+            }
         }, 500)
     }
 };
