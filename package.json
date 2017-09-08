@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "bourbon-neat": "^1.9.0",
+    "debounce": "^1.0.2",
     "modal-vue": "0.0.3",
     "vue": "^2.4.2",
     "vue-codemirror": "^3.1.4",

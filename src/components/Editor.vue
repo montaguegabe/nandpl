@@ -51,6 +51,7 @@ VueCodeMirror.CodeMirror.defineMode('nand', () => {
 });
 
 require('codemirror/keymap/sublime.js');
+import debounce from 'debounce';
 
 export default {
     components: {
@@ -58,7 +59,7 @@ export default {
     },
     data: function() {
         return {
-            code: 'y_0 := x_0 NAND x_1',
+            code: '',
 
             // Options for codemirror
             editorOptions: {
@@ -80,11 +81,15 @@ export default {
 
             // Load document
             this.codeMirror = codeMirror;
-            Storage.restoreDocument(codeMirror);
+            var restored = Storage.restoreDocument(codeMirror);
+            if (!restored) {
+                // Add a default line of NAND
+                this.code = 'y_0 := x_0 NAND x_1';
+            }
         },
-        'onEditorCodeChange': function(code) {
+        'onEditorCodeChange': debounce(function(e) {
             Storage.saveDocument(this.codeMirror);
-        }
+        }, 500)
     }
 };
 </script>

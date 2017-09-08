@@ -4,6 +4,6 @@ TODO
 [x] NAND<<
 [x] Output
 [x] Help
-[-] Persistence
+[x] Persistence
 [-] Comment indicator
 [-] SS button to code
