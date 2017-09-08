@@ -3,18 +3,18 @@
     <h3>NAND Editor</h3>
     <p>Implementation of the NAND, NAND++ and NAND&lt;&lt; languages.
         <span style='display: inline-block'>
-            <a href="http://www.introtcs.org/public/index.html">introtcs.org</a> | <a href="http://www.introtcs.org/public/lec_A_NAND_prog_lang.html">specification</a> | <a href="https://github.com/juan-esteller/NAND">repository</a>
+            <a href="http://www.introtcs.org/public/index.html" target="_blank">introtcs.org</a> | <a href="http://www.introtcs.org/public/lec_A_NAND_prog_lang.html" target="_blank">specification</a> | <a href="https://github.com/juan-esteller/NAND" target="_blank">repository</a> | <a href="#" onclick="return false;" @click="help">help</a>
         </span>
     </p>
+
     <editor ref="editor"></editor>
-    <!--<input type="checkbox" id="silent-checkbox" v-model="silent">
-    <label for="checkbox">Silent</label> -->
+
     <input type="radio" id="nand" value="nand" v-model="language">
     <label for="one">NAND</label>
     <input type="radio" id="nandpp" value="nandpp" v-model="language">
     <label for="two">NAND++</label>
     <input type="radio" id="nandgg" value="nandgg" v-model="language">
-    <label for="two">NAND<<</label>
+    <label for="two">NAND&lt;&lt;</label>
     <input type="checkbox" id="ss-checkbox" v-model="ss">
     <label for="checkbox">Syntactic Sugar</label>
     <input type="checkbox" id="dry-checkbox" v-model="dry">
@@ -23,6 +23,8 @@
     <button class="interpret" @click="interpret">Interpret</button>
     <hr>
     <console ref="console"></console>
+
+    <v-dialog :adaptive="true" width="100%" height="100%" />
 </div>
 </template>
 
@@ -75,6 +77,17 @@ export default {
             }
 
             console.log(result);
+        },
+        'help': function() {
+            this.$modal.show('dialog', {
+                title: 'The NAND Programming Language Editor',
+                text: '<p>This website provides an easy, client-side interface to the NAND, NAND++ and NAND&lt;&lt; programming languages from <a href="http://www.introtcs.org">introtcs.org</a>. See in particular the following <a href="http://www.introtcs.org/public/lec_A_NAND_prog_lang.html">appendix</a> for the languages\' specifications.</p>' +
+                    '<p>The site is built upon Juan Esteller\'s <a href="https://github.com/juan-esteller/NAND">standalone interpreter</a> written in OCaml. You will need to use this version to run massive programs that do not fit in browser memory.</p>' +
+                    '<p>The source of this web application can be found <a href="https://github.com/montaguegabe/nandpl">here</a>. If you find a bug please report it in the issues section, or feel free to contribute yourself.</p>',
+                buttons: [
+                    { title: 'Close' }
+                ]
+            });
         }
     }
 };
