@@ -16,8 +16,40 @@ import Vue from 'vue';
 import VueCodeMirror from 'vue-codemirror';
 import { codemirror, CodeMirror } from 'vue-codemirror';
 import Storage from 'services/Storage.js';
+import FileSaver from 'file-saver';
 
 Vue.use(VueCodeMirror);
+CodeMirror.commands.save = function(codeMirror) {
+    var code = codeMirror.getDoc().getValue();
+    var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
+    if (!window.GLOBAL_NAND_FILENAME) {
+        var name = prompt('Enter filename to save', '');
+        if (!name) {
+            return;
+        }
+        if (name.endsWith('.nand')) {
+            name = name.substring(0, name.length - 5);
+        }
+        window.GLOBAL_NAND_FILENAME = name;
+    }
+    FileSaver.saveAs(blob, window.GLOBAL_NAND_FILENAME + '.nand');
+};
+
+CodeMirror.commands.save = function(codeMirror) {
+    var code = codeMirror.getDoc().getValue();
+    var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
+    if (!window.GLOBAL_NAND_FILENAME) {
+        var name = prompt('Enter filename to save', '');
+        if (!name) {
+            return;
+        }
+        if (name.endsWith('.nand')) {
+            name = name.substring(0, name.length - 5);
+        }
+        window.GLOBAL_NAND_FILENAME = name;
+    }
+    FileSaver.saveAs(blob, window.GLOBAL_NAND_FILENAME + '.nand');
+};
 
 // Define mode
 VueCodeMirror.CodeMirror.defineMode('nand', () => {
@@ -115,13 +147,24 @@ export default {
             // Load document
             this.codeMirror = codeMirror;
             var restored = Storage.restoreDocument(codeMirror);
-            if (!restored.length) {
+            if (restored === null) {
                 // Add a default line of NAND
                 this.code = 'y_0 := x_0 NAND x_1';
             } else {
                 this.ignoreNext = true;
                 checkLanguageType.call(this, restored);
             }
+
+            // Listen for drop events - should wipe before dropping
+            codeMirror.on('drop', function(cm, ev) {
+                var name = ev.dataTransfer.files[0].name;
+                if (name.endsWith('.nand')) {
+                    name = name.substring(0, name.length - 5);
+                }
+                window.GLOBAL_NAND_FILENAME = name;
+                this.code = '';
+            }.bind(this));
+
         },
         'onEditorCodeChange': debounce(function(code) {
 
@@ -130,7 +173,6 @@ export default {
                 this.ignoreNext = false;
                 return;
             }
-
             Storage.saveDocument(this.codeMirror);
 
             checkLanguageType.call(this, code);

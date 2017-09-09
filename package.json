@@ -7,8 +7,9 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js",
     "buildml": "$(npm bin)/bsb",
+    "build": "node build/build.js",
+    "testbuild": "cd dist && http-server .",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
@@ -18,6 +19,7 @@
   "dependencies": {
     "bourbon-neat": "^1.9.0",
     "debounce": "^1.0.2",
+    "file-saver": "^1.3.3",
     "modal-vue": "0.0.3",
     "vue": "^2.4.2",
     "vue-codemirror": "^3.1.4",

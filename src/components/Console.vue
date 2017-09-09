@@ -41,7 +41,7 @@ export default {
     font-size: 16px;
     color: white;
     background-color: #130f1c;
-    height: 300px;
+    height: 100%;
     padding-left: 5px;
     overflow-y: scroll;
     overflow-x: visible;

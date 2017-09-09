@@ -7,5 +7,6 @@ TODO
 [x] Persistence
 [x] Comment indicator
 [x] No save upon load
-[-] SS button to code
+[x] SS button to code
 [-] Undo rechecks language
+[-] Search and comment addons

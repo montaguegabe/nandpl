@@ -10,6 +10,7 @@ function saveDocument(codeMirror) {
     var doc = codeMirror.getDoc();
     Vue.localStorage.set('docContents', doc.getValue());
     Vue.localStorage.set('docHistory', JSON.stringify(doc.getHistory()));
+    Vue.localStorage.set('docName', window.GLOBAL_NAND_FILENAME);
 }
 
 function restoreDocument(codeMirror) {
@@ -17,12 +18,14 @@ function restoreDocument(codeMirror) {
     var doc = codeMirror.getDoc();
     var docContents = Vue.localStorage.get('docContents');
     var docHistory = JSON.parse(Vue.localStorage.get('docHistory'));
-    if (docHistory && docContents) {
+    var docName = Vue.localStorage.get('docName');
+    if (docHistory && docContents && docName) {
         doc.setValue(docContents);
         doc.setHistory(docHistory);
+        window.GLOBAL_NAND_FILENAME = docName;
         return docContents;
     }
-    return '';
+    return null;
 }
 
 export default {

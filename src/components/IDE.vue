@@ -1,29 +1,30 @@
 <template>
 <div class="ide">
-    <h3>NAND Editor</h3>
-    <p>Implementation of the NAND, NAND++ and NAND&lt;&lt; languages.
-        <span style='display: inline-block'>
-            <a href="http://www.introtcs.org/public/index.html" target="_blank">introtcs.org</a> | <a href="http://www.introtcs.org/public/lec_A_NAND_prog_lang.html" target="_blank">specification</a> | <a href="https://github.com/juan-esteller/NAND" target="_blank">repository</a> | <a href="#" onclick="return false;" @click="help">help</a>
-        </span>
-    </p>
+    <div class="fixed-height">
+        <v-dialog :adaptive="true" width="100%" height="100%" />
+        <h3>NAND Editor</h3>
+        <p>Implementation of the NAND, NAND++ and NAND&lt;&lt; languages.
+            <span style='display: inline-block'>
+                <a href="http://www.introtcs.org/public/index.html" target="_blank">introtcs.org</a> | <a href="http://www.introtcs.org/public/lec_A_NAND_prog_lang.html" target="_blank">specification</a> | <a href="https://github.com/juan-esteller/NAND" target="_blank">repository</a> | <a href="#" onclick="return false;" @click="help">help</a>
+            </span>
+        </p>
 
-    <editor ref="editor" v-on:modechange="codeModeChanged"></editor>
+        <editor ref="editor" v-on:modechange="codeModeChanged"></editor>
 
-    <input type="radio" id="nand" value="nand" v-model="language">
-    <label for="one">NAND</label>
-    <input type="radio" id="nandpp" value="nandpp" v-model="language">
-    <label for="two">NAND++</label>
-    <input type="radio" id="nandgg" value="nandgg" v-model="language">
-    <label for="two">NAND&lt;&lt;</label>
-    <input type="checkbox" id="ss-checkbox" v-model="ss">
-    <label for="checkbox">Syntactic Sugar</label>
-    <button class="interpret" v-if="ss" @click="unsweeten">Unsweeten</button>
-    <input class="input-box" v-model="input" title="For example: 01, d4">
-    <button class="interpret" @click="interpret">Interpret</button>
-    <hr>
-    <console ref="console"></console>
-
-    <v-dialog :adaptive="true" width="100%" height="100%" />
+        <input type="radio" id="nand" value="nand" v-model="language">
+        <label for="one">NAND</label>
+        <input type="radio" id="nandpp" value="nandpp" v-model="language">
+        <label for="two">NAND++</label>
+        <input type="radio" id="nandgg" value="nandgg" v-model="language">
+        <label for="two">NAND&lt;&lt;</label>
+        <input type="checkbox" id="ss-checkbox" v-model="ss">
+        <label for="checkbox">Syntactic Sugar</label>
+        <button class="interpret" v-if="ss" @click="unsweeten">Unsweeten</button>
+        <input class="input-box" v-model="input" title="For example: 01, d4" placeholder="Input">
+        <button class="interpret" @click="interpret">Interpret</button>
+        <hr>
+    </div>
+    <console ref="console" class="expand-height"></console>
 </div>
 </template>
 
@@ -101,13 +102,13 @@ export default {
                 var num = parseInt(resultClean, 2);
                 this.$refs.console.pushMessage('Result: ' + result.toString() + ' (' + num.toString() + ')', 'result');
 
-                // Scroll to bottom of console
-                setTimeout(() => {
-                    this.$refs.console.scrollBottom();
-                }, 5);
-
                 console.log(result);
             }
+
+            // Scroll to bottom of console
+            setTimeout(() => {
+                this.$refs.console.scrollBottom();
+            }, 5);
 
             // Editor gets generated code for dry mode
             if (this.dry) {
@@ -141,6 +142,20 @@ export default {
 
 @import "../styles/grid.scss";
 @import "neat";
+
+.ide {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.fixed-height {
+    flex: 0 0 auto;
+}
+
+.expand-height {
+    flex: 1 1 400px;
+}
 
 .input-box {
     font-size: 14px;

@@ -19,9 +19,11 @@
     color: #372c50;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
-body {
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
 }
