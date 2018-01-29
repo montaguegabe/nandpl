@@ -126,7 +126,7 @@ export default {
             this.$modal.show('dialog', {
                 title: 'The NAND Programming Language Editor',
                 text: '<p>This website provides an easy, client-side interface to the NAND, NAND++ and NAND&lt;&lt; programming languages from <a href="http://www.introtcs.org">introtcs.org</a>. See in particular the following <a href="http://www.introtcs.org/public/lec_A_NAND_prog_lang.html">appendix</a> for the languages\' specifications.</p>' +
-                    '<p>The site is built upon Juan Esteller\'s <a href="https://github.com/juan-esteller/NAND">standalone interpreter</a> written in OCaml. You will need to use this version to run massive programs that do not fit in browser memory.</p>' +
+                    '<p>Built by Gabe Montague, based on Juan Esteller\'s <a href="https://github.com/juan-esteller/NAND">standalone interpreter</a> written in OCaml. You will need to use this version to run massive programs that do not fit in browser memory.</p>' +
                     '<p>The source of this web application can be found <a href="https://github.com/montaguegabe/nandpl">here</a>. If you find a bug please report it in the issues section, or feel free to contribute yourself.</p>',
                 buttons: [
                     { title: 'Close' }
